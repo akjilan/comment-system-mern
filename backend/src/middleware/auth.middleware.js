@@ -10,14 +10,22 @@ export const protect = async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
-
-  if (!token) return res.status(401).json({ error: "Not authorized" });
+  if (!token) {
+    return res.status(401).json({ error: "Not authorized" });
+  }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await findUserById(decoded.id).select("-password");
+
+    const user = await findUserById(decoded.id);
+
+    if (!user) return res.status(401).json({ error: "User not found" });
+    user.password = undefined;
+    req.user = user;
+
     next();
   } catch (error) {
-    return res.status(401).json({ error: "Invalid token" });
+    // console.log(error, "this is error");
+    return res.status(401).json({ error: "Invalid token given" });
   }
 };
