@@ -10,7 +10,7 @@ export default function Footer() {
       "
     >
       <p className="text-sm">
-        © {new Date().getFullYear()} Comment System – Built with
+        © {new Date().getFullYear()} Comment System. All rights reserved.
       </p>
     </footer>
   );

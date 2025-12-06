@@ -57,7 +57,7 @@ export default function Register() {
       >
         {/* Title */}
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">
-          Create Your Account 
+          Create Your Account
         </h2>
 
         {/* Form */}

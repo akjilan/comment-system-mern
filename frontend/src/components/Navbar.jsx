@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSun, FiMoon, FiUser, FiLogOut } from "react-icons/fi";
 import AuthContext from "../context/AuthContext";
+import ThemeContext from "../context/ThemeContext";
 
 export default function Navbar() {
   const { user, logoutUser } = useContext(AuthContext);
@@ -9,15 +10,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   // theme handling
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-
-    document.documentElement.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem("theme", newTheme);
-  };
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handleLogout = () => {
     logoutUser();
@@ -51,7 +44,7 @@ export default function Navbar() {
       {/* Right Section */}
       <div className="flex items-center gap-4">
         {/* Theme Toggle */}
-        <button
+        {/* <button
           onClick={toggleTheme}
           className="
             p-2 rounded-full 
@@ -66,7 +59,7 @@ export default function Navbar() {
           ) : (
             <FiSun className="text-xl" />
           )}
-        </button>
+        </button> */}
 
         {/* If NOT logged in */}
         {!user ? (

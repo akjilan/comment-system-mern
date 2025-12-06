@@ -1,16 +1,136 @@
-# React + Vite
+# Comment System Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite + TailwindCSS frontend for a JWT-authenticated comment system with replies, likes/dislikes, sorting, and pagination.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Setup Guide
 
-## React Compiler
+## 1. Navigate to the frontend folder
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+cd frontend
+2. Install dependencies
+bash
+Copy code
+npm install
+3. Create a .env file
+env
+Copy code
+VITE_API_BASE_URL=http://localhost:5000/api
+For production:
 
-## Expanding the ESLint configuration
+env
+Copy code
+VITE_API_BASE_URL=https://your-backend-domain.com/api
+4. Start development server
+bash
+Copy code
+npm run dev
+5. Build for production
+bash
+Copy code
+npm run build
+6. Preview production build
+bash
+Copy code
+npm run preview
+Project Structure
+pgsql
+Copy code
+frontend/
+│
+├── src/
+│   ├── api/
+│   │   ├── authApi.js
+│   │   └── commentsApi.js
+│   │
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── CommentForm.jsx
+│   │   ├── CommentItem.jsx
+│   │   ├── CommentList.jsx
+│   │   ├── ReplyList.jsx
+│   │   ├── SortBar.jsx
+│   │   ├── Pagination.jsx
+│   │   └── ConfirmModal.jsx
+│   │
+│   ├── context/
+│   │   ├── AuthContext.js
+│   │   ├── AuthProvider.jsx
+│   │   └── ThemeContext.jsx
+│   │
+│   ├── pages/
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── Profile.jsx
+│   │   └── CommentPage.jsx
+│   │
+│   ├── routes/
+│   │   ├── AppRouter.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   └── RedirectIfAuth.jsx
+│   │
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── public/
+└── package.json
+Available Scripts
+Run dev server
+bash
+Copy code
+npm run dev
+Build
+bash
+Copy code
+npm run build
+Preview build
+bash
+Copy code
+npm run preview
+Environment Variables Required
+ini
+Copy code
+VITE_API_BASE_URL=YOUR_BACKEND_URL/api
+Features Included
+Login & Registration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+JWT-based authentication with auto-refresh
+
+Protected routes
+
+Add, edit, delete comments
+
+Reply to comments
+
+Like / dislike comments
+
+Sorting: newest, most liked, most disliked
+
+Pagination
+
+Modern UI using TailwindCSS
+
+Toast notifications
+
+Profile page
+
+Navbar with logout
+
+Deployment Notes
+Vercel / Netlify build command:
+arduino
+Copy code
+npm run build
+Publish directory:
+nginx
+Copy code
+dist
+Add environment variable:
+ini
+Copy code
+VITE_API_BASE_URL=https://your-production-backend.com/api # demo
+```

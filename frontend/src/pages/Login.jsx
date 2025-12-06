@@ -24,7 +24,7 @@ export default function Login() {
       loginUser(res.data.token);
 
       toast.success("Logged in successfully!", {
-        icon: "🔥",
+        icon: "",
       });
 
       navigate("/");

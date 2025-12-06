@@ -13,6 +13,8 @@ import CommentList from "../components/CommentList";
 import CommentForm from "../components/CommentForm";
 import SortBar from "../components/SortBar";
 import Pagination from "../components/Pagination";
+import toast from "react-hot-toast";
+import ConfirmModal from "../utils/ConfirmModal";
 
 export default function CommentPage() {
   const [comments, setComments] = useState([]);
@@ -20,6 +22,23 @@ export default function CommentPage() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const limit = 10; // comments per page
+  const [deleteId, setDeleteId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDeleteRequest = (id) => {
+    setDeleteId(id);
+    setIsModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await deleteComment(deleteId);
+      fetchComments();
+      toast.success("Comment deleted successfully!");
+    } catch (err) {
+      toast.error("Failed to delete comment");
+    }
+  };
 
   const fetchComments = async () => {
     try {
@@ -65,14 +84,6 @@ export default function CommentPage() {
     fetchComments();
   };
 
-  // Delete Comment
-  const handleDelete = async (id) => {
-    if (confirm("Are you sure you want to delete this comment?")) {
-      await deleteComment(id);
-      fetchComments();
-    }
-  };
-
   return (
     <div className="max-w-3xl mx-auto p-4">
       {/* Modern Header Card */}
@@ -96,11 +107,17 @@ export default function CommentPage() {
         onDislike={handleDislike}
         onReply={handleReply}
         onEdit={handleEdit}
-        onDelete={handleDelete}
+        onDelete={handleDeleteRequest}
       />
 
       {/* Pagination */}
       <Pagination page={page} setPage={setPage} total={total} limit={limit} />
+
+      <ConfirmModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={confirmDelete}
+      />
     </div>
   );
 }
