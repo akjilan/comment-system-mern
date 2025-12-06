@@ -68,12 +68,13 @@ export default function Register() {
               Name
             </label>
             <div className="relative">
-              <FiUser className="absolute left-3 top-3 text-gray-400 dark:text-gray-500 text-xl" />
+              <FiUser className="absolute left-3 top-4 text-gray-400 dark:text-gray-500 text-xl" />
               <input
                 type="text"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
+                placeholder="Enter your name"
                 className="
                   w-full pl-11 pr-4 py-3 text-lg rounded-xl
                   bg-gray-100 dark:bg-neutral-800 
@@ -92,12 +93,13 @@ export default function Register() {
               Email
             </label>
             <div className="relative">
-              <FiMail className="absolute left-3 top-3 text-gray-400 dark:text-gray-500 text-xl" />
+              <FiMail className="absolute left-3 top-4 text-gray-400 dark:text-gray-500 text-xl" />
               <input
                 type="email"
                 name="email"
                 value={form.email}
                 onChange={handleChange}
+                placeholder="Enter your email"
                 className="
                   w-full pl-11 pr-4 py-3 text-lg rounded-xl
                   bg-gray-100 dark:bg-neutral-800
@@ -116,12 +118,13 @@ export default function Register() {
               Password
             </label>
             <div className="relative">
-              <FiLock className="absolute left-3 top-3 text-gray-400 dark:text-gray-500 text-xl" />
+              <FiLock className="absolute left-3 top-4 text-gray-400 dark:text-gray-500 text-xl" />
               <input
                 type="password"
                 name="password"
                 value={form.password}
                 onChange={handleChange}
+                placeholder="Enter your password"
                 className="
                   w-full pl-11 pr-4 py-3 text-lg rounded-xl
                   bg-gray-100 dark:bg-neutral-800
