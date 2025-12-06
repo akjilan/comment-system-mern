@@ -1,136 +1,107 @@
-# Comment System Frontend
+# comment-system-mern
 
-A React + Vite + TailwindCSS frontend for a JWT-authenticated comment system with replies, likes/dislikes, sorting, and pagination.
+
+Frontend documentation :
+
+
+# Comment System Frontend (React + Vite + Tailwind)
+
+This is the frontend of the MERN Comment System project.
+It features authentication, comment CRUD, replies, likes/dislikes, sorting, pagination, profile view, and a modern UI with Tailwind CSS.
 
 ---
 
-# Setup Guide
+## 📌 Table of Contents
 
-## 1. Navigate to the frontend folder
+1. Project Overview
+2. Features
+3. Tech Stack
+4. Folder Structure
+5. Environment Variables
+6. Setup Instructions
+7. Running the App
+8. Build for Production
+9. Deployment Notes
+
+---
+
+## 1. Project Overview
+
+This frontend is built using **React (Vite)** and communicates with the backend API to provide a complete comment system.
+Users can log in, register, add/edit/delete comments, reply, like/dislike, and sort comments.
+
+---
+
+## 2. Features
+
+- Login / Register pages
+- JWT-based authentication
+- View profile
+- Add, edit, delete comments
+- Add replies
+- Like / dislike with validation
+- Sorting bar (newest, most liked, most disliked)
+- Pagination
+- Protected routes
+- Global auth context
+- Modern UI with Tailwind
+- Toast notifications
+
+---
+
+## 3. Tech Stack
+
+- React (Vite)
+- React Router
+- Axios
+- Tailwind CSS
+- React Icons
+- React Hot Toast
+
+---
+
+## 4. Folder Structure
 
 ```bash
-cd frontend
-2. Install dependencies
-bash
-Copy code
-npm install
-3. Create a .env file
-env
-Copy code
-VITE_API_BASE_URL=http://localhost:5000/api
-For production:
-
-env
-Copy code
-VITE_API_BASE_URL=https://your-backend-domain.com/api
-4. Start development server
-bash
-Copy code
-npm run dev
-5. Build for production
-bash
-Copy code
-npm run build
-6. Preview production build
-bash
-Copy code
-npm run preview
-Project Structure
-pgsql
-Copy code
 frontend/
+│── public/
+│   └── _redirects   (for Netlify routing)
 │
-├── src/
+│── src/
 │   ├── api/
-│   │   ├── authApi.js
-│   │   └── commentsApi.js
-│   │
 │   ├── components/
-│   │   ├── Navbar.jsx
-│   │   ├── Footer.jsx
-│   │   ├── CommentForm.jsx
-│   │   ├── CommentItem.jsx
-│   │   ├── CommentList.jsx
-│   │   ├── ReplyList.jsx
-│   │   ├── SortBar.jsx
-│   │   ├── Pagination.jsx
-│   │   └── ConfirmModal.jsx
-│   │
 │   ├── context/
-│   │   ├── AuthContext.js
-│   │   ├── AuthProvider.jsx
-│   │   └── ThemeContext.jsx
-│   │
 │   ├── pages/
-│   │   ├── Login.jsx
-│   │   ├── Register.jsx
-│   │   ├── Profile.jsx
-│   │   └── CommentPage.jsx
-│   │
 │   ├── routes/
-│   │   ├── AppRouter.jsx
-│   │   ├── ProtectedRoute.jsx
-│   │   └── RedirectIfAuth.jsx
-│   │
+│   ├── styles/
 │   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
+│   └── main.jsx
 │
-├── public/
-└── package.json
-Available Scripts
-Run dev server
-bash
-Copy code
+│── package.json
+│── vite.config.js
+│── README.md
+
+
+
+
+##setup
+
+Create a .env file inside the frontend folder:
+
+VITE_API_BASE_URL=https://comment-system-mern.onrender.com/api
+
+
+7. Running the App
+Development mode
 npm run dev
-Build
-bash
-Copy code
+
+
+The app will run at:
+
+http://localhost:5173
+
+8. Build for Production
 npm run build
-Preview build
-bash
-Copy code
-npm run preview
-Environment Variables Required
-ini
-Copy code
-VITE_API_BASE_URL=YOUR_BACKEND_URL/api
-Features Included
-Login & Registration
 
-JWT-based authentication with auto-refresh
 
-Protected routes
-
-Add, edit, delete comments
-
-Reply to comments
-
-Like / dislike comments
-
-Sorting: newest, most liked, most disliked
-
-Pagination
-
-Modern UI using TailwindCSS
-
-Toast notifications
-
-Profile page
-
-Navbar with logout
-
-Deployment Notes
-Vercel / Netlify build command:
-arduino
-Copy code
-npm run build
-Publish directory:
-nginx
-Copy code
-dist
-Add environment variable:
-ini
-Copy code
-VITE_API_BASE_URL=https://your-production-backend.com/api # demo
-```
+````
