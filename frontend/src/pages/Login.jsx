@@ -28,7 +28,7 @@ export default function Login() {
     try {
       const res = await loginRequest(form);
       loginUser(res.data.token); // Save token + fetch user
-      navigate("/"); // Redirect to comments page
+      navigate("/"); 
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");
     }
