@@ -49,7 +49,7 @@ export default function CommentItem({
       p-5 rounded-2xl shadow-md 
       bg-white dark:bg-neutral-900 
       border border-gray-200 dark:border-neutral-800
-      transition-all duration-300
+      transition-all duration-300 
     "
     >
       {/* USER HEADER */}
@@ -96,7 +96,7 @@ export default function CommentItem({
               className="
                 flex items-center gap-2 px-4 py-2 rounded-xl
                 bg-blue-600 hover:bg-blue-700 text-white
-                transition-all duration-300 shadow
+                transition-all duration-300 shadow cursor-pointer
               "
             >
               <FiCheck /> Save
@@ -132,7 +132,7 @@ export default function CommentItem({
         {/* Like */}
         <button
           onClick={() => onLike(comment._id)}
-          className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition"
+          className="flex items-center cursor-pointer gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition"
         >
           <FiThumbsUp /> {comment.likes?.length}
         </button>
@@ -140,7 +140,7 @@ export default function CommentItem({
         {/* Dislike */}
         <button
           onClick={() => onDislike(comment._id)}
-          className="flex items-center gap-2 hover:text-red-600 dark:hover:text-red-400 transition"
+          className="flex items-center cursor-pointer gap-2 hover:text-red-600 dark:hover:text-red-400 transition"
         >
           <FiThumbsDown /> {comment.dislikes?.length}
         </button>
@@ -148,7 +148,7 @@ export default function CommentItem({
         {/* Reply */}
         <button
           onClick={() => setShowReply(!showReply)}
-          className="flex items-center gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition"
+          className="flex items-center cursor-pointer gap-2 hover:text-purple-600 dark:hover:text-purple-400 transition"
         >
           <FiMessageCircle /> Reply
         </button>
@@ -158,14 +158,14 @@ export default function CommentItem({
           <>
             <button
               onClick={() => setIsEditing(true)}
-              className="flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:opacity-80 transition"
+              className="flex items-center cursor-pointer gap-2 text-blue-600 dark:text-blue-400 hover:opacity-80 transition"
             >
               <FiEdit /> Edit
             </button>
 
             <button
               onClick={() => onDelete(comment._id)}
-              className="flex items-center gap-2 text-red-600 dark:text-red-400 hover:opacity-80 transition"
+              className="flex items-center gap-2  cursor-pointer text-red-600 dark:text-red-400 hover:opacity-80 transition"
             >
               <FiTrash2 /> Delete
             </button>
@@ -194,7 +194,7 @@ export default function CommentItem({
             onClick={handleReplySubmit}
             className="
               px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white 
-              rounded-xl transition shadow
+              rounded-xl transition shadow cursor-pointer
             "
           >
             Reply
