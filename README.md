@@ -2,9 +2,7 @@
 
 This is a comment system built with full stack (MERN)
 
-Backend Documentation:
-
-# Comment System Backend (Node.js + Express + MongoDB)
+## Backend Documentation: Comment System Backend (Node.js + Express + MongoDB)
 
 This is the backend API for the MERN Comment System project.  
 It includes authentication (JWT), comments CRUD, replies, like/dislike, sorting, and pagination.
@@ -59,7 +57,7 @@ It is built using **Node.js, Express, and MongoDB (Mongoose)** and supports logi
 
 ## 4. Folder Structure
 
-````
+```
 backend/
 │── src/
 │   ├── controllers/
@@ -74,113 +72,94 @@ backend/
 │── package.json
 │── .env (ignored)
 │── README.md
-5. Environment Variables
 
+```
+
+## 5. Environment Variables
 
 Create a .env file inside the backend folder:
-
 
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
-6. Setup Instructions
+
+## 6. Setup Instructions
+
 Install dependencies
 
 cd backend
 npm install
 
-
 Create .env file
 Use placeholder values:
-
 
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
 
-
 Start development server
 
 npm run dev
-
 
 Start production server
 
 npm start
 
-7. Running the Server
-
+## 7. Running the Server
 
 The server runs locally at:
 
 http://localhost:5000
 
+## 8. API Endpoints
 
-8. API Endpoints
-
+```
 🔐 Authentication
-Method	Endpoint	Description
-POST	/api/auth/register	Register user
-POST	/api/auth/login	Login + get token
-GET	/api/auth/me	Get logged in user
+
+Method    Endpoint               Description
+POST      /api/auth/register     Register user
+POST      /api/auth/login        Login + get token
+GET       /api/auth/me           Get logged in user
 
 💬 Comments
 
-Method	Endpoint	Description
-GET	/api/comments	Get paginated comments
-POST	/api/comments	Add comment
-PUT	/api/comments/:id	Edit comment
-DELETE	/api/comments/:id	Delete comment
+Method    Endpoint                     Description
+GET       /api/comments                Get paginated comments
+POST      /api/comments                Add comment
+PUT       /api/comments/:id            Edit comment
+DELETE    /api/comments/:id            Delete comment
 
 Query params:
 
-
 ?page=1&limit=10&sort=newest
+
 Sort options:
-
 newest
-
 most_liked
-
 most_disliked
 
 ↩️ Reply to Comments
-Method	Endpoint	Description
-POST	/api/comments/:id/reply	Add reply
+
+Method    Endpoint                     Description
+POST      /api/comments/:id/reply      Add reply
 
 Body:
-
 {
   "text": "This is a reply"
 }
-👍 / 👎 Like & Dislike
 
-
-Method	Endpoint	Description
-POST	/api/comments/:id/like	Like comment
-POST	/api/comments/:id/dislike	Dislike comment
-
-
+Like & Dislike
+Method    Endpoint                     Description
+POST      /api/comments/:id/like       Like comment
+POST      /api/comments/:id/dislike    Dislike comment
 
 Backend will deploy at:
 https://comment-system-mern.onrender.com/
 
-
 Use that URL in the frontend.
+```
 
-
-
-#backend documentation ends here
-
-
-
-
-
-
-Frontend documentation :
-
-
-# Comment System Frontend (React + Vite + Tailwind)
+## Frontend Documentation: Comment System Backend (Node.js + Express + MongoDB)
 
 This is the frontend of the MERN Comment System project.
 It features authentication, comment CRUD, replies, likes/dislikes, sorting, pagination, profile view, and a modern UI with Tailwind CSS.
@@ -193,11 +172,10 @@ It features authentication, comment CRUD, replies, likes/dislikes, sorting, pagi
 2. Features
 3. Tech Stack
 4. Folder Structure
-5. Environment Variables
-6. Setup Instructions
-7. Running the App
+5. Install Dependencies
+6. Environment Setup
+7. Start Development Server
 8. Build for Production
-9. Deployment Notes
 
 ---
 
@@ -238,46 +216,50 @@ Users can log in, register, add/edit/delete comments, reply, like/dislike, and s
 
 ## 4. Folder Structure
 
-```bash
+```
 frontend/
 │── public/
-│   └── _redirects   (for Netlify routing)
+│   └── _redirects          # Netlify routing rules
 │
 │── src/
-│   ├── api/
-│   ├── components/
-│   ├── context/
-│   ├── pages/
-│   ├── routes/
-│   ├── styles/
-│   ├── App.jsx
-│   └── main.jsx
+│   ├── api/                # API request functions
+│   ├── components/         # Reusable UI components
+│   ├── context/            # Global state management
+│   ├── pages/              # Page components for routing
+│   ├── routes/             # App routes configuration
+│   ├── styles/             # Global & module styles
+│   ├── App.jsx             # Root app component
+│   └── main.jsx            # Entry point
 │
 │── package.json
 │── vite.config.js
 │── README.md
 
+```
 
+## 5.Install Dependencies
 
+cd frontend
+npm install
 
-##setup
+## 6. Environment Setup
 
 Create a .env file inside the frontend folder:
 
 VITE_API_BASE_URL=https://comment-system-mern.onrender.com/api
 
+## 7. Start Development Server
 
-7. Running the App
-Development mode
 npm run dev
-
 
 The app will run at:
 
 http://localhost:5173
 
-8. Build for Production
+## 8. Build for Production
+
 npm run build
 
+```
 
-````
+```
