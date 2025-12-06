@@ -12,11 +12,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://comment-system-mern.netlify.app/",
-    ],
-    credentials: true,
+    origin: "*",
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
