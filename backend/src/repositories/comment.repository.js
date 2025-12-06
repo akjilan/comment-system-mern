@@ -25,6 +25,15 @@ export const fetchComments = async (filter, options = {}) => {
     .limit(options.limit || 10);
 };
 
+export const addReply = async (commentId, replyData) => {
+  return await Comment.findByIdAndUpdate(
+    commentId,
+    { $push: { replies: replyData } },
+    { new: true }
+  ).populate("replies.user", "name email");
+};
+
+
 export const countComments = async (filter) => {
   return await Comment.countDocuments(filter);
 };

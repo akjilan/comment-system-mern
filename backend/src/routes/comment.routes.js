@@ -7,6 +7,7 @@ import {
   likeCommentController,
   dislikeCommentController,
   listCommentsController,
+  replyToComment,
 } from "../controllers/comment.controller.js";
 
 const router = express.Router();
@@ -22,5 +23,8 @@ router.delete("/:id", protect, deleteCommentController);
 router.post("/:id/like", protect, likeCommentController);
 
 router.post("/:id/dislike", protect, dislikeCommentController);
+
+router.post("/:id/reply", protect, replyToComment);
+
 
 export default router;

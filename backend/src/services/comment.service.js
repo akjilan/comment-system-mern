@@ -5,6 +5,7 @@ import {
   deleteCommentById,
   fetchComments,
   countComments,
+  addReply as addReplyRepo,
 } from "../repositories/comment.repository.js";
 
 export const addComment = async ({ content, userId, parentComment = null }) => {
@@ -89,4 +90,17 @@ export const getComments = async ({
   const total = await countComments({});
 
   return { comments, total };
+};
+
+export const addReplyToComment = async (commentId, userId, text) => {
+  const comment = await findCommentById(commentId);
+  if (!comment) throw new Error("Comment not found");
+
+  const replyData = {
+    user: userId,
+    text,
+    createdAt: new Date(),
+  };
+
+  return await addReplyRepo(commentId, replyData);
 };
