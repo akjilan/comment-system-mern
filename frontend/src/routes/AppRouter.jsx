@@ -6,6 +6,7 @@ import CommentPage from "../pages/Commentpage";
 import RedirectIfAuth from "./RedirectIfAuth";
 import Navbar from "../components/Navbar";
 import Profile from "../pages/Profile";
+import Footer from "../components/Footer";
 
 const router = createBrowserRouter([
   {
@@ -28,8 +29,9 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <ProtectedRoute>
-        <Navbar></Navbar>
+        <Navbar />
         <CommentPage />
+        <Footer />
       </ProtectedRoute>
     ),
   },
@@ -39,6 +41,7 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Navbar />
         <Profile />
+        <Footer />
       </ProtectedRoute>
     ),
   },

@@ -19,6 +19,7 @@ export const updateCommentById = async (id, data) => {
 export const fetchComments = async (filter, options = {}) => {
   return await Comment.find(filter)
     .populate("user", "name email")
+    .populate("replies.user", "name email")
     .populate("parentComment")
     .sort(options.sort || { createdAt: -1 })
     .skip(options.skip || 0)
@@ -32,7 +33,6 @@ export const addReply = async (commentId, replyData) => {
     { new: true }
   ).populate("replies.user", "name email");
 };
-
 
 export const countComments = async (filter) => {
   return await Comment.countDocuments(filter);

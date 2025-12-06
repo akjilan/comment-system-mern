@@ -75,8 +75,13 @@ export default function CommentPage() {
 
   return (
     <div className="max-w-3xl mx-auto p-4">
-      {/* Header */}
-      <h1 className="text-3xl font-bold mb-6">Comments</h1>
+      {/* Modern Header Card */}
+      <div className="mb-6">
+        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 flex items-center gap-3">
+          Comments
+          <span className="w-2 h-8 bg-indigo-600 rounded-full"></span>
+        </h1>
+      </div>
 
       {/* Add Comment Form */}
       <CommentForm onSubmit={handleAddComment} />

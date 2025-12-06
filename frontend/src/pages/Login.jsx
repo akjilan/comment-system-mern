@@ -1,90 +1,130 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
+import { FiMail, FiLock } from "react-icons/fi";
 import { loginRequest } from "../api/authApi";
+import AuthContext from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const navigate = useNavigate();
   const { loginUser } = useContext(AuthContext);
 
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
-  const [error, setError] = useState("");
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setLoading(true);
 
     try {
       const res = await loginRequest(form);
-      loginUser(res.data.token); // Save token + fetch user
-      navigate("/"); 
+      loginUser(res.data.token);
+
+      toast.success("Logged in successfully!", {
+        icon: "🔥",
+      });
+
+      navigate("/");
     } catch (err) {
-      setError(err.response?.data?.error || "Login failed");
+      toast.error(err.response?.data?.error || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-md">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Login to Your Account
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black transition-all duration-300 px-4">
+      <div
+        className="
+        w-full max-w-md 
+        p-8 rounded-2xl shadow-xl 
+        backdrop-blur-xl bg-white/70 dark:bg-neutral-900/60 
+        border border-white/20 dark:border-neutral-700/40
+        transition-all duration-300
+      "
+      >
+        {/* Title */}
+        <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8 uppercase">
+          login
         </h2>
 
-        {error && (
-          <p className="text-red-600 text-sm mb-4 text-center">{error}</p>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email */}
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Email Input */}
           <div>
-            <label className="block mb-1 text-sm font-medium">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
-              required
-            />
+            <label className="text-gray-600 dark:text-gray-300 text-sm font-semibold mb-2 block">
+              Email
+            </label>
+            <div className="relative">
+              <FiMail className="absolute left-3 top-3 text-gray-400 dark:text-gray-500 text-xl" />
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                className="
+                  w-full pl-11 pr-4 py-3 text-lg rounded-xl
+                  bg-gray-100 dark:bg-neutral-800 
+                  text-gray-900 dark:text-gray-100
+                  focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 
+                  outline-none transition-all duration-300
+                "
+                required
+              />
+            </div>
           </div>
 
-          {/* Password */}
+          {/* Password Input */}
           <div>
-            <label className="block mb-1 text-sm font-medium">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-indigo-300"
-              required
-            />
+            <label className="text-gray-600 dark:text-gray-300 text-sm font-semibold mb-2 block">
+              Password
+            </label>
+            <div className="relative">
+              <FiLock className="absolute left-3 top-3 text-gray-400 dark:text-gray-500 text-xl" />
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                className="
+                  w-full pl-11 pr-4 py-3 text-lg rounded-xl
+                  bg-gray-100 dark:bg-neutral-800
+                  text-gray-900 dark:text-gray-100
+                  focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 
+                  outline-none transition-all duration-300
+                "
+                required
+              />
+            </div>
           </div>
 
-          {/* Submit */}
+          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition"
+            disabled={loading}
+            className="
+              w-full py-3 text-lg font-semibold rounded-xl
+              bg-blue-600 hover:bg-blue-700 
+              dark:bg-blue-500 dark:hover:bg-blue-600
+              text-white shadow-md hover:shadow-lg
+              transition-all duration-300 disabled:opacity-50
+            "
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        <p className="mt-4 text-center text-sm">
-          Don't have an account?{" "}
-          <Link to="/register" className="text-indigo-600 hover:underline">
-            Register here
+        {/* Footer */}
+        <p className="mt-6 text-center text-gray-600 dark:text-gray-400">
+          Don’t have an account?{" "}
+          <Link
+            to="/register"
+            className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+          >
+            Register
           </Link>
         </p>
       </div>
