@@ -15,6 +15,7 @@ import SortBar from "../components/SortBar";
 import Pagination from "../components/Pagination";
 import toast from "react-hot-toast";
 import ConfirmModal from "../utils/ConfirmModal";
+import { socket } from "../../socket.js";
 
 export default function CommentPage() {
   const [comments, setComments] = useState([]);
@@ -53,6 +54,41 @@ export default function CommentPage() {
   useEffect(() => {
     fetchComments();
   }, [page, sort]);
+
+  useEffect(() => {
+    // New comment created
+    socket.on("comment:created", () => {
+      fetchComments();
+    });
+
+    // Comment updated
+    socket.on("comment:updated", () => {
+      fetchComments();
+    });
+
+    // Deleted
+    socket.on("comment:deleted", () => {
+      fetchComments();
+    });
+
+    // Reply added
+    socket.on("comment:replied", () => {
+      fetchComments();
+    });
+
+    // Like or Dislike updated
+    socket.on("comment:reacted", () => {
+      fetchComments();
+    });
+
+    return () => {
+      socket.off("comment:created");
+      socket.off("comment:updated");
+      socket.off("comment:deleted");
+      socket.off("comment:replied");
+      socket.off("comment:reacted");
+    };
+  }, []);
 
   // Add new comment
   const handleAddComment = async (content) => {

@@ -9,11 +9,14 @@ import {
 } from "../services/comment.service.js";
 
 export const createCommentController = async (req, res) => {
+  const io = req.app.get("io");
   try {
     const { content, parentComment } = req.body;
     const userId = req.user._id;
 
     const comment = await addComment({ content, userId, parentComment });
+
+    io.emit("comment:created", comment);
 
     res.status(201).json({ message: "Comment added", comment });
   } catch (error) {
@@ -22,12 +25,15 @@ export const createCommentController = async (req, res) => {
 };
 
 export const editCommentController = async (req, res) => {
+  const io = req.app.get("io");
+
   try {
     const commentId = req.params.id;
     const userId = req.user._id;
     const { content } = req.body;
 
     const updated = await editComment(commentId, userId, content);
+    io.emit("comment:updated", updated);
 
     res.json({ message: "Comment updated", comment: updated });
   } catch (error) {
@@ -36,11 +42,14 @@ export const editCommentController = async (req, res) => {
 };
 
 export const deleteCommentController = async (req, res) => {
+  const io = req.app.get("io");
+
   try {
     const commentId = req.params.id;
     const userId = req.user._id;
 
     await deleteComment(commentId, userId);
+    io.emit("comment:deleted", req.params.id);
 
     res.json({ message: "Comment deleted" });
   } catch (error) {
@@ -49,8 +58,11 @@ export const deleteCommentController = async (req, res) => {
 };
 
 export const likeCommentController = async (req, res) => {
+  const io = req.app.get("io");
+
   try {
     const updated = await likeComment(req.params.id, req.user._id);
+    io.emit("comment:reacted", updated);
     res.json({ message: "Like updated", comment: updated });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -58,8 +70,11 @@ export const likeCommentController = async (req, res) => {
 };
 
 export const dislikeCommentController = async (req, res) => {
+  const io = req.app.get("io");
+
   try {
     const updated = await dislikeComment(req.params.id, req.user._id);
+    io.emit("comment:reacted", updated);
     res.json({ message: "Dislike updated", comment: updated });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -82,8 +97,9 @@ export const listCommentsController = async (req, res) => {
   }
 };
 
-
 export const replyToComment = async (req, res) => {
+  const io = req.app.get("io");
+
   try {
     const commentId = req.params.id;
     const { text } = req.body;
@@ -95,13 +111,13 @@ export const replyToComment = async (req, res) => {
       req.user._id,
       text
     );
+    io.emit("comment:replied", updatedComment);
 
     res.status(200).json({
       message: "Reply added successfully",
-      comment: updatedComment
+      comment: updatedComment,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
-

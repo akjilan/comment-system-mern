@@ -78,27 +78,38 @@ frontend/
 
 ## 5.Install Dependencies
 
+```
+
 cd frontend
+
 npm install
 
+```
+
 ## 6. Environment Setup
+
+```
 
 Create a .env file inside the frontend folder:
 
 VITE_API_BASE_URL=https://comment-system-mern.onrender.com/api
 
+```
+
 ## 7. Start Development Server
 
+```
 npm run dev
 
 The app will run at:
 
 http://localhost:5173
 
+```
+
 ## 8. Build for Production
 
-npm run build
-
 ```
+npm run build
 
 ```
